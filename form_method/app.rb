@@ -9,8 +9,8 @@ require './models/items'
 set :database, { adapter: 'mysql2', database: 'demo' }
 
 get '/' do
-  @name = params["list_name"]
-  if @name && @name.strip.length > 0
+  name = params["list_name"]
+  if name && name.strip.length > 0
     redirect "/list/#{URI.encode(@name)}"
   else
     @lists = Lists.limit(10).order("count desc").as_json
@@ -22,15 +22,15 @@ get '/list/:list' do
   @list_name = params['list']
   @items = Items.where(:list_title => @list_name)
   if Lists.where(:title => @list_name).blank?
-    @list = Lists.new(:title => @list_name)
-    @list.save
+    list = Lists.new(:title => @list_name)
+    list.save
   end
   erb :list
 end
 
 post '/list/:list' do |list_name|
   item = params["item"]
-  if item && list_name
+  if item && item.strip.length > 0 && list_name
     list = Lists.where(:title => list_name).first || List.new(:title => list_name)
     list.count += 1
     list.save
@@ -55,10 +55,6 @@ get '/api/list' do
   Lists.all.to_json
 end
 
-get '/api/get/:list' do
-  Lists.all.to_json
-end
-
-delete '/api/rm/:list/:item' do
-  Lists.all.to_json
+get '/api/get/:list' do |list|
+  Items.where(:list_title => list).to_json
 end

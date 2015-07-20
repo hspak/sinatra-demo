@@ -13,15 +13,12 @@ if (( $? != 0 )); then
 fi
 
 brew install ruby
-brew install postgres
+brew install mysql
 
 bundle install
 
-# mysql
-# initdb /usr/local/var/postgres
-# /usr/local/bin/postgres -D /usr/local/var/postgres >> db.log 2>&1 &
-
-# createdb "demo"
+mysql.server start
+mysql -u root -e "create databases demo;"
 
 # rake db:create_migration NAME="create_lists"
 # rake db:create_migration NAME="create_items"

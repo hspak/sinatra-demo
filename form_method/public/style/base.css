@@ -1,0 +1,19 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+}
+
+a:hover {
+  color: #abc;
+}
+
+.container {
+  width: 700px;
+  margin: auto;
+  padding: auto;
+}

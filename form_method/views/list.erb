@@ -2,18 +2,30 @@
 <html>
   <head>
     <title>Sinatra</title>
+    <link rel="stylesheet" type="text/css" href="/style/base.css">
+    <link rel="stylesheet" type="text/css" href="/style/list.css">
   </head>
   <body>
-    <h1>Items for <%= @list_name %></h1>
-    <% @items.each do |t| %>
-      <p><%= t["task"] %>
-      <form action="/rm/<%= @list_name %>/<%= t["id"] %>" method="post">
-        <button type="submit">x</button>
+    <div class="container">
+      <div class="title">Items for <%= @list_name %></div>
+      <div class="item-table">
+      <% @items.each do |t| %>
+        <div class="item-entry">
+          <div class="item-button">
+            <form action="/rm/<%= @list_name %>/<%= t["id"] %>" method="post">
+              <button type="submit">x</button>
+            </form>
+          </div>
+          <div class="item-label"><%= t["task"] %></div>
+        </div>
+      <% end %>
+      <form action="/list/<%= @list_name %>" method="post">
+        <input type="text", name="item"></input>
       </form>
-      </p>
-    <% end %>
-    <form action="/list/<%= @list_name %>" method="post">
-      <input type="text", name="item"></input>
-    </form>
+      </div>
+      <div class="back">
+        <a href="/">Go back</a>
+      </div>
+    </div>
   </body>
 </html>

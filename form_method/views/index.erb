@@ -1,17 +1,29 @@
 <!doctype html>
 <html>
   <head>
-    <title>Sinatra</title>
+    <title>YATL</title>
     <link rel="stylesheet" type="text/css" href="/style/base.css">
     <link rel="stylesheet" type="text/css" href="/style/index.css">
   </head>
   <body>
-    <form method="get">
-      <input type="text" name="list_name"></input>
-    </form>
-    <% @lists.each do |l| %>
-      <p><%= l["title"] %> <%= l["count"] %>
-      </p>
-    <% end %>
+    <div class="container">
+      <div class="title">YATL</div>
+      <div class="input-area">
+        <form method="get">
+          <span class="input-label">Open a list:</span>
+          <input type="text" name="list_name"></input>
+        </form>
+      </div>
+      <div class="list-table">
+      <% @lists.each do |l| %>
+        <a href="/list/<%= l["title"] %>">
+        <div class="list-entry">
+          <div class="list-title">List: <%= l["title"] %></div>
+          <div class="list-count">Count: <%= l["count"] %></div>
+        </div>
+        </a>
+      <% end %>
+      </div>
+    </div>
   </body>
 </html>
