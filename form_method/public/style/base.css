@@ -1,6 +1,8 @@
 html {
   margin: 0;
   padding: 0;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #ddd;
 }
 
 a {
@@ -9,11 +11,23 @@ a {
 }
 
 a:hover {
-  color: #abc;
+  color: #aaa;
 }
 
 .container {
-  width: 700px;
+  width: 600px;
   margin: auto;
   padding: auto;
+}
+
+.input-box {
+  background-color: #fefefe;
+  border: 0;
+  opacity: .3;
+  margin-right: 100px;
+  margin-bottom: 5px;
+
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
 }

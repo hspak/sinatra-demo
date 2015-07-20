@@ -4,6 +4,7 @@
     <title>Sinatra</title>
     <link rel="stylesheet" type="text/css" href="/style/base.css">
     <link rel="stylesheet" type="text/css" href="/style/list.css">
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div class="container">
@@ -20,7 +21,7 @@
         </div>
       <% end %>
       <form action="/list/<%= @list_name %>" method="post">
-        <input type="text", name="item"></input>
+        <input class="input-box" type="text", name="item"></input>
       </form>
       </div>
       <div class="back">
