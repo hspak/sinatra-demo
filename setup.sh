@@ -15,10 +15,10 @@ fi
 brew install ruby
 brew install mysql
 
+gem install bunder
 bundle install
 
 mysql.server start
-mysql -u root -e "create databases demo;"
+mysql -u root -e "create database demo;"
 
-# rake db:create_migration NAME="create_lists"
-# rake db:create_migration NAME="create_items"
+bundle exec rake db:migrate
