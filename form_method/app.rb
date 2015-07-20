@@ -31,7 +31,7 @@ end
 post '/list/:list' do |list_name|
   item = params["item"]
   if item && item.strip.length > 0 && list_name
-    list = Lists.where(:title => list_name).first || List.new(:title => list_name)
+    list = Lists.where(:title => list_name).first || Lists.new(:title => list_name)
     list.count += 1
     list.save
     Items.new(:list_title => list_name, :task => item).save
@@ -56,5 +56,44 @@ get '/api/list' do
 end
 
 get '/api/get/:list' do |list|
+  '{"status":"failure","reason":"The list field is blank."}' if list.strip.length == 0
+
   Items.where(:list_title => list).to_json
+end
+
+delete '/api/rm/:list/:id' do |list, id|
+  '{"status":"failure","reason":"The list field is blank."}' if list.strip.length == 0
+  '{"status":"failure","reason":"The id field is blank."}' if id.strip.length == 0
+  "{\"status\":\"failure\",\"reason\":\"List #{list} does not exist.\"}" unless Lists.where(:title => list)
+  "{\"status\":\"failure\",\"reason\":\"Id #{id} does not exist.\"}" unless Items.where(:id => id)
+
+  begin
+    item = Items.where(:id => id).first
+    list = Lists.where(:title => list).first
+    item.destroy
+    list.count -= 1
+    item.save
+    list.save
+    '{"status":"success"}'
+  rescue
+    status 500
+    '{"status":"failure","reason":"You broke it."}'
+  end
+end
+
+put '/api/add/:list/:item' do |list, item|
+  '{"status":"failure","reason":"The list field is blank."}' if list.strip.length == 0
+  '{"status":"failure","reason":"The item field is blank."}' if item.strip.length == 0
+
+  begin
+    item = Items.new(:list_title => list, :task => item)
+    item.save
+    list = Lists.where(:title => list).first || Lists.new(:title => list)
+    list.count += 1
+    list.save
+    '{"status":"success"}'
+  rescue
+    status 500
+    '{"status":"failure","reason":"You broke it."}'
+  end
 end
