@@ -2,12 +2,16 @@
 <html>
   <head>
     <title>Sinatra</title>
+    <link rel="stylesheet" type="text/css" href="/style/base.css">
+    <link rel="stylesheet" type="text/css" href="/style/index.css">
   </head>
   <body>
-    <p>Time is: <%= Time.now %></p>
-    <% @list.each do |item| %>
-      <p><%= item.title %></p>
+    <form method="get">
+      <input type="text" name="list_name"></input>
+    </form>
+    <% @lists.each do |l| %>
+      <p><%= l["title"] %> <%= l["count"] %>
+      </p>
     <% end %>
-    <input type="text"></input>
   </body>
 </html>

@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20150628051148) do
   end
 
   create_table "lists", force: :cascade do |t|
-    t.string "title", limit: 255
+    t.string  "title", limit: 255
+    t.integer "count", limit: 4,   default: 0
   end
 
 end

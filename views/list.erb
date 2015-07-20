@@ -4,8 +4,16 @@
     <title>Sinatra</title>
   </head>
   <body>
+    <h1>Items for <%= @list_name %></h1>
     <% @items.each do |t| %>
-      <p><%= t["task"] %></p>
+      <p><%= t["task"] %>
+      <form action="/rm/<%= @list_name %>/<%= t["id"] %>" method="post">
+        <button type="submit">x</button>
+      </form>
+      </p>
     <% end %>
+    <form action="/list/<%= @list_name %>" method="post">
+      <input type="text", name="item"></input>
+    </form>
   </body>
 </html>
