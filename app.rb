@@ -11,7 +11,7 @@ set :database, { adapter: 'mysql2', database: 'demo' }
 get '/' do
   name = params["list_name"]
   if name && name.strip.length > 0
-    redirect "/list/#{URI.encode(@name)}"
+    redirect "/list/#{URI.encode(name)}"
   else
     @lists = Lists.limit(10).order("count desc").as_json
     erb :index
@@ -61,7 +61,7 @@ get '/api/get/:list' do |list|
   Items.where(:list_title => list).to_json
 end
 
-delete '/api/rm/:list/:id' do |list, id|
+delete '/api/:list/:id' do |list, id|
   '{"status":"failure","reason":"The list field is blank."}' if list.strip.length == 0
   '{"status":"failure","reason":"The id field is blank."}' if id.strip.length == 0
   "{\"status\":\"failure\",\"reason\":\"List #{list} does not exist.\"}" unless Lists.where(:title => list)
@@ -81,7 +81,7 @@ delete '/api/rm/:list/:id' do |list, id|
   end
 end
 
-put '/api/add/:list/:item' do |list, item|
+put '/api/:list/:item' do |list, item|
   '{"status":"failure","reason":"The list field is blank."}' if list.strip.length == 0
   '{"status":"failure","reason":"The item field is blank."}' if item.strip.length == 0
 

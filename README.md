@@ -14,5 +14,5 @@ Install Ruby and Mysql. `setup.sh` exists to help, but is not meant to be depend
 ## API
     GET    /api/list
     GET    /api/get/:list
-    PUT    /api/add/:list/:task
-    DELETE /api/rm/:list/:id
+    PUT    /api/:list/:task
+    DELETE /api/:list/:id
