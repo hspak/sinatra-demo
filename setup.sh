@@ -15,7 +15,7 @@ fi
 brew install ruby
 brew install mysql
 
-gem install bunder
+gem install bundler
 bundle install
 
 mysql.server start
